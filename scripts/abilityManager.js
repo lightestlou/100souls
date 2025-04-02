@@ -1,5 +1,6 @@
 import { renderAbilityCard, renderAbilityList } from './abilities.js';
 import { character, saveCharacterData } from './charactersheet.js';
+import { baseUrl } from './config.js';
 
 class AbilityManager {
   constructor() {
@@ -97,7 +98,7 @@ class AbilityManager {
 
   async loadAbilities() {
     try {
-      const response = await fetch('../data/abilities.json');
+      const response = await fetch(`${baseUrl}/data/abilities.json`);
       this.abilities = await response.json();
       this.renderAbilities();
     } catch (error) {

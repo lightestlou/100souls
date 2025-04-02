@@ -1,4 +1,5 @@
 import { character, saveCharacterData } from './charactersheet.js';
+import { baseUrl } from './config.js';
 
 class FeatManager {
   constructor() {
@@ -97,7 +98,7 @@ class FeatManager {
 
   async loadFeats() {
     try {
-      const response = await fetch('../data/feats.json');
+      const response = await fetch(`${baseUrl}/data/feats.json`);
       this.feats = await response.json();
       this.renderFeats();
     } catch (error) {
