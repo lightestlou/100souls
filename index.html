@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 Souls Character Sheet</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-gray-900 text-gray-100 min-h-screen p-6">
+
+
+  <div class="bg-gray-800 shadow-2xl rounded-xl p-6 w-full max-w-6xl mx-auto">
+
+
+    <!-- Top Bar with Dice Roller and Controls -->
+    <div class="flex gap-4 mb-8">
+
+      <!-- Dice Roller -->
+      <div id="dice-roller" class="w-auto p-4 rounded-lg bg-gray-800 shadow-lg border border-gray-700 text-center">
+        <h2 class="text-lg font-bold text-gray-300 mb-3">🎲 Dice Roller</h2>
+        <div id="dice-result" class="text-2xl font-bold mb-2">–</div>
+        <div id="dice-description" class="text-sm text-gray-300 italic mb-4">Click roll to begin</div>
+        <button id="roll-dice-btn"
+          class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded transition-transform">Roll 1d6 -
+          1d6</button>
+      </div>
+
+      <!-- Control Panel Card -->
+      <div class="flex-1 p-4 rounded-lg bg-gray-800 shadow-lg border border-gray-700">
+        <h2 class="text-lg text-center font-bold text-gray-300 mb-3">🛠️ Control Panel</h2>
+        <!-- First Row of Buttons -->
+        <div class="flex gap-2 mb-2 justify-center">
+          <button id="save-btn"
+            class="w-32 px-3 py-1 bg-indigo-600 text-white rounded flex items-center justify-center">💾 Save</button>
+          <button id="load-btn"
+            class="w-32 px-3 py-1 bg-indigo-600 text-white rounded flex items-center justify-center">📂 Load</button>
+          <button id="clear-btn"
+            class="w-32 px-3 py-1 bg-red-600 text-white rounded flex items-center justify-center">🗑️ Clear</button>
+        </div>
+        <!-- Second Row of Buttons -->
+        <div class="flex gap-2 justify-center">
+          <button id="export-btn"
+            class="w-32 px-3 py-1 bg-gray-600 text-white rounded flex items-center justify-center">⬇️ Export</button>
+          <label for="import-input"
+            class="w-32 px-3 py-1 bg-gray-600 text-white rounded flex items-center justify-center">⬆️ Import</label>
+          <input type="file" id="import-input" class="hidden" />
+          <a href="rulebook.html" target="_blank"
+            class="w-32 px-3 py-1 bg-indigo-600 text-white rounded flex items-center justify-center">📘 Rulebook</a>
+        </div>
+      </div>
+
+      <!-- Version Panel -->
+      <div class="w-auto p-4 rounded-lg bg-gray-800 shadow-lg border border-gray-700 flex items-center justify-center">
+        <div id="version-info" class="text-gray-300 text-center"></div>
+      </div>
+
+
+    </div>
+
+    <!-- Title Text-->
+    <h1 class="text-3xl font-bold text-center text-gray-300 mb-6">100 Souls Character Sheet</h1>
+
+    <!-- Tab Navigation -->
+    <div class="mb-6">
+      <div class="border-b border-gray-700">
+        <nav class="-mb-px flex justify-center space-x-8" aria-label="Tabs">
+          <button
+            class="tab-button border-indigo-500 text-indigo-400 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2"
+            data-tab="basic">
+            <span class="text-lg">📋</span>
+            Basic Info
+          </button>
+          <button
+            class="tab-button border-transparent text-gray-500 hover:text-indigo-400 hover:border-indigo-500 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2"
+            data-tab="skills">
+            <span class="text-lg">🎯</span>
+            Skills
+          </button>
+          <button
+            class="tab-button border-transparent text-gray-500 hover:text-indigo-400 hover:border-indigo-500 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2"
+            data-tab="combat">
+            <span class="text-lg">⚔️</span>
+            Combat
+          </button>
+          <button
+            class="tab-button border-transparent text-gray-500 hover:text-indigo-400 hover:border-indigo-500 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2"
+            data-tab="abilities">
+            <span class="text-lg">⭐</span>
+            Abilities
+          </button>
+          <button
+            class="tab-button border-transparent text-gray-500 hover:text-indigo-400 hover:border-indigo-500 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2"
+            data-tab="feats">
+            <span class="text-lg">✨</span>
+            Feats
+          </button>
+          <button
+            class="tab-button border-transparent text-gray-500 hover:text-indigo-400 hover:border-indigo-500 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2"
+            data-tab="inventory">
+            <span class="text-lg">🎒</span>
+            Inventory
+          </button>
+          <button
+            class="tab-button border-transparent text-gray-500 hover:text-indigo-400 hover:border-indigo-500 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm flex items-center gap-2"
+            data-tab="notes">
+            <span class="text-lg">📝</span>
+            Notes
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <!-- Basic Info Tab -->
+      <div id="basic-tab" class="tab-pane active">
+        <!-- Character Info -->
+        <div id="character-info" class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700 mb-8">
+          <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">🧾 Character Info</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="Name" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Name</label>
+              <input id="Name" data-section="Character Info" data-key="Name" type="text"
+                class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+            </div>
+
+            <div>
+              <label for="Epithat" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Epithat</label>
+              <input id="Epithat" data-section="Character Info" data-key="Epithat" type="text"
+                class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+            </div>
+
+            <div class="col-span-2">
+              <label for="Background"
+                class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Background</label>
+              <textarea id="Background" data-section="Character Info" data-key="Background" rows="2"
+                class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+            </div>
+
+            <div class="col-span-2">
+              <label for="Traits" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Traits</label>
+              <textarea id="Traits" data-section="Character Info" data-key="Traits" rows="2"
+                class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+            </div>
+
+            <div class="col-span-2">
+              <label for="Complications"
+                class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Complications</label>
+              <textarea id="Complications" data-section="Character Info" data-key="Complications" rows="2"
+                class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Tab -->
+      <div id="skills-tab" class="tab-pane hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Core Skills -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">💪 Core Skills</h2>
+            <div class="flex flex-col gap-4">
+              <div>
+                <label for="Physique"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Physique</label>
+                <input id="Physique" data-section="Core Skills" data-key="Physique" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Coordination"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Coordination</label>
+                <input id="Coordination" data-section="Core Skills" data-key="Coordination" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Mental Resilience"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Mental
+                  Resilience</label>
+                <input id="Mental Resilience" data-section="Core Skills" data-key="Mental Resilience" type="number"
+                  value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Spiritual Aptitude"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Spiritual Aptitude</label>
+                <input id="Spiritual Aptitude" data-section="Core Skills" data-key="Spiritual Aptitude" type="number"
+                  value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Sensory Skills -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">👁️ Sensory Skills</h2>
+            <div class="flex flex-col gap-4">
+              <div>
+                <label for="Spot" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Spot</label>
+                <input id="Spot" data-section="Sensory Skills" data-key="Spot" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Listen" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Listen</label>
+                <input id="Listen" data-section="Sensory Skills" data-key="Listen" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Smell" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Smell</label>
+                <input id="Smell" data-section="Sensory Skills" data-key="Smell" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Taste" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Taste</label>
+                <input id="Taste" data-section="Sensory Skills" data-key="Taste" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Touch" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Touch</label>
+                <input id="Touch" data-section="Sensory Skills" data-key="Touch" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Interpersonal Skills -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">🗣️ Interpersonal Skills
+            </h2>
+            <div class="flex flex-col gap-4">
+              <div>
+                <label for="Etiquette"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Etiquette</label>
+                <input id="Etiquette" data-section="Interpersonal Skills" data-key="Etiquette" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Streetwise"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Streetwise</label>
+                <input id="Streetwise" data-section="Interpersonal Skills" data-key="Streetwise" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Perform"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Perform</label>
+                <input id="Perform" data-section="Interpersonal Skills" data-key="Perform" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Empathy"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Empathy</label>
+                <input id="Empathy" data-section="Interpersonal Skills" data-key="Empathy" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Intimidate"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Intimidate</label>
+                <input id="Intimidate" data-section="Interpersonal Skills" data-key="Intimidate" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Deceive"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Deceive</label>
+                <input id="Deceive" data-section="Interpersonal Skills" data-key="Deceive" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Persuade"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Persuade</label>
+                <input id="Persuade" data-section="Interpersonal Skills" data-key="Persuade" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Knowledge Skills -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">📚 Knowledge Skills</h2>
+            <div class="flex flex-col gap-4">
+              <div>
+                <label for="Arcana" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Arcana</label>
+                <input id="Arcana" data-section="Knowledge Skills" data-key="Arcana" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Astronomy"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Astronomy</label>
+                <input id="Astronomy" data-section="Knowledge Skills" data-key="Astronomy" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Beast" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Beast</label>
+                <input id="Beast" data-section="Knowledge Skills" data-key="Beast" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Geography"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Geography</label>
+                <input id="Geography" data-section="Knowledge Skills" data-key="Geography" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="History"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">History</label>
+                <input id="History" data-section="Knowledge Skills" data-key="History" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Nature" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Nature</label>
+                <input id="Nature" data-section="Knowledge Skills" data-key="Nature" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Religion"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Religion</label>
+                <input id="Religion" data-section="Knowledge Skills" data-key="Religion" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combat Stats Tab -->
+      <div id="combat-tab" class="tab-pane hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Combat Stats -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">⚔️ Combat Stats</h2>
+            <div class="flex flex-col gap-4">
+              <div>
+                <label for="Actions"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Actions</label>
+                <input id="Actions" data-section="Combat Stats" data-key="Actions" type="number" value="3"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Reactions"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Reactions</label>
+                <input id="Reactions" data-section="Combat Stats" data-key="Reactions" type="number" value="3"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Mana" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Mana</label>
+                <input id="Mana" data-section="Combat Stats" data-key="Mana" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Speed" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Speed</label>
+                <input id="Speed" data-section="Combat Stats" data-key="Speed" type="number" value="3"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Melee Accuracy" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Melee
+                  Accuracy</label>
+                <input id="Melee Accuracy" data-section="Combat Stats" data-key="Melee Accuracy" type="number" value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+              <div>
+                <label for="Ranged Accuracy" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Ranged
+                  Accuracy</label>
+                <input id="Ranged Accuracy" data-section="Combat Stats" data-key="Ranged Accuracy" type="number"
+                  value="0"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Combat Resources -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">🎯 Combat Resources</h2>
+            <div class="flex flex-col gap-6">
+              <div>
+                <label class="block text-sm text-gray-400 tracking-wide font-semibold mb-2">Actions</label>
+                <div class="flex gap-2">
+                  <div id="actionNodes" class="flex gap-2">
+                    <!-- Nodes will be dynamically added here -->
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm text-gray-400 tracking-wide font-semibold mb-2">Reactions</label>
+                <div class="flex gap-2">
+                  <div id="reactionNodes" class="flex gap-2">
+                    <!-- Nodes will be dynamically added here -->
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm text-gray-400 tracking-wide font-semibold mb-2">Mana</label>
+                <div class="flex gap-2">
+                  <div id="manaNodes" class="flex gap-2">
+                    <!-- Nodes will be dynamically added here -->
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm text-gray-400 tracking-wide font-semibold mb-2">Speed</label>
+                <div class="flex gap-2">
+                  <div id="speedNodes" class="flex gap-2">
+                    <!-- Nodes will be dynamically added here -->
+                  </div>
+                </div>
+              </div>
+              <button onclick="resetCombatResources()"
+                class="mt-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded">
+                Reset All Resources
+              </button>
+            </div>
+          </div>
+
+          <!-- Health and Damage -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">❤️ Health & Damage</h2>
+            <div class="flex flex-col gap-4">
+              <!-- Soft Damage -->
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="Soft Damage" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Soft
+                    Damage</label>
+                  <input id="Soft Damage" data-section="Damage Tracker" data-key="Soft Damage" type="number" value="0"
+                    class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                </div>
+                <div>
+                  <label for="Soft Health" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Soft
+                    Health</label>
+                  <input id="Soft Health" data-section="Damage Tracker" data-key="Soft Health" type="number" value="12"
+                    class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                </div>
+              </div>
+              <!-- Hard Damage -->
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="Hard Damage" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Hard
+                    Damage</label>
+                  <input id="Hard Damage" data-section="Damage Tracker" data-key="Hard Damage" type="number" value="0"
+                    class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                </div>
+                <div>
+                  <label for="Hard Health" class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Hard
+                    Health</label>
+                  <input id="Hard Health" data-section="Damage Tracker" data-key="Hard Health" type="number" value="3"
+                    class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                </div>
+              </div>
+              <div>
+                <label for="Conditions"
+                  class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Conditions</label>
+                <textarea id="Conditions" data-section="Damage Tracker" data-key="Conditions" rows="3"
+                  class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-y"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Health Status -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">❤️ Health Status</h2>
+            <div class="flex flex-col gap-6">
+              <!-- Soft Health -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-sm text-gray-400 tracking-wide font-semibold">Soft Damage</label>
+                  <span class="text-sm text-gray-400">
+                    <span id="soft-health-current">0</span> / <span id="soft-health-max">0</span>
+                  </span>
+                </div>
+                <div id="soft-health-nodes" class="flex gap-2">
+                  <!-- Nodes will be dynamically added here -->
+                </div>
+              </div>
+
+              <!-- Hard Health -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-sm text-gray-400 tracking-wide font-semibold">Hard Damage</label>
+                  <span class="text-sm text-gray-400">
+                    <span id="hard-health-current">0</span> / <span id="hard-health-max">0</span>
+                  </span>
+                </div>
+                <div id="hard-health-nodes" class="flex gap-2">
+                  <!-- Nodes will be dynamically added here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Damage Calculation -->
+          <div class="col-span-2 bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">🎯 Damage Calculation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- Attack Damage Section -->
+              <div class="border-r border-gray-700 pr-8">
+                <h3 class="text-lg font-semibold text-gray-300 mb-2">⚔️ Attack Damage</h3>
+                <div class="space-y-2">
+                  <div>
+                    <label for="Attack Damage"
+                      class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Attack Damage</label>
+                    <input id="Attack Damage" data-section="Combat Stats" data-key="Attack Damage" type="number"
+                      value="0"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                  </div>
+                  <div>
+                    <label for="Weapon Damage"
+                      class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Weapon Modifier</label>
+                    <input id="Weapon Damage" data-section="Combat Stats" data-key="Weapon Damage" type="number"
+                      value="0"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                  </div>
+                  <div>
+                    <label for="Attack Power"
+                      class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Power</label>
+                    <input id="Attack Power" type="number" value="100"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                  </div>
+                  <div>
+                    <label class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Final Attack
+                      Damage</label>
+                    <div id="Final Attack Damage"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white hover:bg-gray-600 transition-colors duration-200">
+                      0.0</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ability Damage Section -->
+              <div class="pl-8">
+                <h3 class="text-lg font-semibold text-gray-300 mb-2">✨ Ability Damage</h3>
+                <div class="space-y-2">
+                  <div>
+                    <label for="Ability Damage"
+                      class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Ability Damage</label>
+                    <input id="Ability Damage" data-section="Combat Stats" data-key="Ability Damage" type="number"
+                      value="0"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                  </div>
+                  <div>
+                    <label for="Conduit Damage"
+                      class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Conduit Modifier</label>
+                    <input id="Conduit Damage" data-section="Combat Stats" data-key="Conduit Damage" type="number"
+                      value="0"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                  </div>
+                  <div>
+                    <label for="Ability Power"
+                      class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Power</label>
+                    <input id="Ability Power" type="number" value="100"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                  </div>
+                  <div>
+                    <label class="block text-sm text-gray-400 tracking-wide font-semibold mb-1">Final Ability
+                      Damage</label>
+                    <div id="Final Ability Damage"
+                      class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white hover:bg-gray-600 transition-colors duration-200">
+                      0.0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abilities Tab -->
+      <div id="abilities-tab" class="tab-pane hidden">
+        <div class="p-4 space-y-6">
+          <!-- Search Section -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-lg font-semibold text-gray-100 mb-4">Add New Abilities</h2>
+            <div id="ability-search-container" class="relative">
+              <input type="text" id="ability-search-input" placeholder="Search abilities..."
+                class="w-full p-2 rounded bg-gray-700 text-white border border-gray-600">
+              <div id="ability-search-dropdown"
+                class="absolute z-10 w-full bg-gray-800 border border-gray-600 rounded mt-1 shadow-lg max-h-60 overflow-y-auto hidden">
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Abilities Section -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-lg font-semibold text-gray-100 mb-4">Your Abilities</h2>
+            <div id="abilities-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Abilities will be rendered here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feats Tab -->
+      <div id="feats-tab" class="tab-pane hidden">
+        <div class="p-4 space-y-6">
+          <!-- Search Section -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-lg font-semibold text-gray-100 mb-4">Add New Feats</h2>
+            <div id="feat-search-container" class="relative">
+              <input type="text" id="feat-search-input" placeholder="Search feats..."
+                class="w-full p-2 rounded bg-gray-700 text-white border border-gray-600">
+              <div id="feat-search-dropdown"
+                class="absolute z-10 w-full bg-gray-800 border border-gray-600 rounded mt-1 shadow-lg max-h-60 overflow-y-auto hidden">
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Feats Section -->
+          <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+            <h2 class="text-lg font-semibold text-gray-100 mb-4">Your Feats</h2>
+            <div id="feats-container" class="space-y-4">
+              <!-- Feats will be rendered here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventory Tab -->
+      <div id="inventory-tab" class="tab-pane hidden">
+        <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+          <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">🎒 Inventory</h2>
+          <div>
+            <textarea id="Inventory" data-section="Character Info" data-key="Inventory" rows="8"
+              class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Tab -->
+      <div id="notes-tab" class="tab-pane hidden">
+        <div class="bg-gray-800 p-4 rounded-lg shadow border border-gray-700">
+          <h2 class="text-xl font-bold text-gray-300 border-b border-indigo-500 pb-1 mb-4">📝 Notes</h2>
+          <div>
+            <textarea id="Notes" data-section="Character Info" data-key="Notes" rows="8"
+              class="w-full p-2 bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-8 text-center text-xs text-gray-500">
+    <div id="copyright-info" class="max-w-3xl mx-auto"></div>
+  </footer>
+
+  <script type="module" src="scripts/featManager.js"></script>
+  <script type="module" src="scripts/charactersheet.js"></script>
+</body>
+
+</html>

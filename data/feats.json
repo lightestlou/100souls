@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Balanced Body",
+        "category": "Physical Feats",
+        "synergy": ["Physique", "Coordination"],
+        "description": "Gain an additional Action & Reaction every turn."
+    },
+    {
+        "name": "Iron Body",
+        "category": "Physical Feats",
+        "synergy": ["Physique"],
+        "description": "Gain +2 Soft Health & +1 Hard Health."
+    },
+    {
+        "name": "Fleet Footed",
+        "category": "Physical Feats",
+        "synergy": ["Coordination"],
+        "description": "Speed +2."
+    },
+    {
+        "name": "Spiritually Gifted",
+        "category": "Physical Feats",
+        "synergy": ["Spiritual Aptitude"],
+        "description": "Mana Capacity +4."
+    },
+    {
+        "name": "Iron Fist",
+        "category": "Physical Feats",
+        "synergy": ["Physique"],
+        "description": "Increase Power of Strikes by 100 when performed Unarmed."
+    },
+    {
+        "name": "Dagger Expertise",
+        "category": "Weapon Feats",
+        "synergy": [],
+        "description": "Increase Power of Strikes by 25 when performed with an Dagger."
+    },
+    {
+        "name": "Dagger Mastery",
+        "category": "Weapon Feats",
+        "synergy": [],
+        "description": "Increase Power of Strikes by 50 when performed with an Dagger."
+    },
+    {
+        "name": "Sword Expertise",
+        "category": "Weapon Feats",
+        "synergy": [],
+        "description": "Increase Power of Strikes by 25 when performed with an Sword."
+    },
+    {
+        "name": "Sword Mastery",
+        "category": "Weapon Feats",
+        "synergy": [],
+        "description": "Increase Power of Strikes by 50 when performed with an Sword."
+    },
+    {
+        "name": "Calm before the storm",
+        "category": "Tactical Feats",
+        "synergy": ["Tactics"],
+        "description": "If you didn't attack last turn, your first attack this turn has an additional 50 power."
+    },
+    {
+        "name": "Adapative Learning",
+        "category": "Tactical Feats",
+        "synergy": ["Tactics"],
+        "description": "When struck by an attack, it's dodge DC is reduced by 1, for you, for the remainder of combat. This effect stacks."
+    },
+    {
+        "name": "Adrenaline Rush",
+        "category": "Spiritual Feats",
+        "synergy": ["Spiritual Aptitude"],
+        "description": "Upon receiving hard damage, immediately gain 2 mana."
+    }
+]

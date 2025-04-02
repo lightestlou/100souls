@@ -1,0 +1,390 @@
+{
+  "normal_attack": {
+    "name": "Normal Attack",
+    "group": "fundamentals",
+    "action": 1,
+    "tags": "Strike",
+    "tempo": "Balanced",
+    "description": "Deal damage with a weapon or your fists.",
+    "power": 100
+  },
+
+  "heavy_attack": {
+    "name": "Heavy Attack",
+    "group": "fundamentals",
+    "action": 2,
+    "tags": "Strike",
+    "tempo": "Heavy",
+    "description": "Deal damage with a weapon or your fists.",
+    "power": 250
+  },
+
+  "move": {
+    "name": "Move",
+    "group": "fundamentals",
+    "action": 1,
+    "tags": "Movement",
+    "tempo": "Balanced",
+    "description": "Move a number of units up to or less than your Speed value."
+  },
+
+  "block": {
+    "name": "Block",
+    "group": "fundamentals",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Heavy",
+    "description": "Brace against incoming damage, diminishing the force of the assault.",
+    "trigger": "You are about to take damage from an attack and you are aware of it."
+  },
+
+  "dodge": {
+    "name": "Dodge",
+    "group": "fundamentals",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Quick",
+    "description": "Attempt to dodge an attack.",
+    "trigger": "You are about to take damage from an attack and you are aware of it.",
+    "contest": "Coordination vs Accuracy",
+    "success": "You avoid the attack.",
+    "failure": "You are hit but take only half damage."
+  },
+
+  "grab_break": {
+    "name": "Grab Break",
+    "group": "fundamentals",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Quick",
+    "description": "Break a grab-tags attack.",
+    "trigger": "You are about to take damage from an attack and you are aware of it.",
+    "prediction": "You anticipate a grab-tags attack.",
+    "success": "Target's attack fails and your reaction is refunded."
+  },
+
+  "drop_prone": {
+    "name": "Drop Prone",
+    "group": "fundamentals",
+    "action": 1,
+    "tempo": "Quick",
+    "tags": "Movement",
+    "description": "You fall prone."
+  },
+
+  "crawl": {
+    "name": "Crawl",
+    "group": "fundamentals",
+    "action": 1,
+    "tags": "Movement",
+    "tempo": "Heavy",
+    "requirement": "You are prone.",
+    "effect": "Move a distance equal to or less than half your Speed. "
+  },
+
+  "stand_up": {
+    "name": "Stand Up",
+    "group": "fundamentals",
+    "action": 1,
+    "tags": "Movement",
+    "tempo": "Balanced",
+    "requirement": "You are prone.",
+    "effect": "You stand up and are no longer prone."
+  },
+
+  "quick_strike": {
+    "name": "Quick Strike",
+    "group": "west_god_style",
+    "action": 1,
+    "tags": "Strike",
+    "tempo": "Quick",
+    "description": "Perform a melee attack.",
+    "power": 25,
+    "accuracy": 3
+  },
+
+  "wild_strike": {
+    "name": "Wild Strike",
+    "group": "west_god_style",
+    "action": 1,
+    "tags": "Strike",
+    "tempo": "Heavy",
+    "description": "Perform a melee attack that deals extra damage but leaves you vulnerable.",
+    "power": 250,
+    "accuracy": 0,
+    "debuff": "Vulnerable 1"
+  },
+
+  "cleave": {
+    "name": "Cleave",
+    "group": "west_god_style",
+    "action": 2,
+    "tags": "Strike",
+    "tempo": "Heavy",
+    "description": "Execute a wide-reaching melee sweep that strikes all targets in melee range within a chosen conical area.",
+    "accuracy": 2,
+    "power": 100
+  },
+
+  "blade_dance": {
+    "name": "Blade Dance",
+    "group": "west_god_style",
+    "action": 2,
+    "tags": "Strike",
+    "tempo": "Quick",
+    "power": "50",
+    "description": "A series of fast strikes aimed at overwhelming the opponent.",
+    "effect": "Perform a melee attack on a target.",
+    "effects": [
+      "If this attack is blocked, dodged, parried, or lands true, you have the option to repeat the attack again for no additional action points.",
+      "This can be done twice (for a total of 3 attacks) before incurring the action point cost again.",
+      "This effect is interrupted if you take damage between the attacks."
+    ]
+  },
+
+  "limit_break": {
+    "name": "Limit Break",
+    "group": "west_god_style",
+    "action": 1,
+    "mana": 1,
+    "tags": "Stance",
+    "description": "A breathing Technique that increases your strength and coordination.",
+    "duration": "3 turns",
+    "effects": [
+      "Increase Power of all strikes by 100",
+      "Increase Speed by 1",
+      "Gain an extra Action and Reaction",
+      "Gain immunity to Weakened"
+    ],
+    "debuff": "Receive 1 Hard Damage immediately after Limit Break ends."
+  },
+
+  "grab_and_hold": {
+    "name": "Grab & Hold",
+    "group": "grappling_fundamentals",
+    "action": 1,
+    "tags": "Grapple",
+    "contest": "Physique",
+    "success": "You actively restrain your target."
+  },
+
+  "tackle": {
+    "name": "Tackle",
+    "group": "grappling_fundamentals",
+    "action": 1,
+    "tags": "Grapple",
+    "movement": true,
+    "condition": "Target is >= 3 but less than Speed x2 units away from you.",
+    "contest": "Physique",
+    "success": "Move to the target. You both become Prone. Target drops anything they were holding.",
+    "failure": "Move to the target but fail to tackle them."
+  },
+
+  "human_shield": {
+    "name": "Human Shield",
+    "group": "grappling_fundamentals",
+    "reaction": 1,
+    "tags": "Grapple",
+    "trigger": "You are the target of an attack while restraining an actor.",
+    "contest": "Physique",
+    "success": "The restrained actor takes 100% of the damage.",
+    "failure": "The restrained actor takes 50% of the damage."
+  },
+
+  "parry_quick": {
+    "name": "Parry (Quick)",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Quick",
+    "description": "Ward off a Strike with a well placed countermove.",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate a quick melee attack.",
+    "success": "Negate the effects of the attack against you and refund 1 reaction point to yourself."
+  },
+
+  "parry_balanced": {
+    "name": "Parry (Balanced)",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Balanced",
+    "description": "Ward off a Strike with a well placed countermove.",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate a balanced melee attack.",
+    "success": "Negate the effects of the attack against you and refund 1 reaction point to yourself."
+  },
+
+  "parry_heavy": {
+    "name": "Parry (Heavy)",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Heavy",
+    "description": "Ward off a Strike with a well placed countermove.",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate a heavy melee attack.",
+    "success": "Negate the effects of the attack against you and refund 1 reaction point to yourself."
+  },
+
+  "attack_of_opportunity": {
+    "name": "Attack of Opportunity",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Strike",
+    "tempo": "Quick",
+    "description": "Take advantage of your foes' mistakes.",
+    "trigger_a": "Target leaves your area of influence.",
+    "trigger_b": "Target attacks another target, casts a spell, or otherwise performs an action that leaves them vulnerable.",
+    "effect": "Perform a Normal Attack against the target without spending an Action Point."
+  },
+
+  "deflect": {
+    "name": "Deflect",
+    "group": "south_god_style",
+    "reaction": 1,
+    "mana": 1,
+    "tags": "Defense",
+    "description": "Use carefully placed mana to deflect a magical or physical projectile.",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate a magical or physical projectile.",
+    "success": "Negate the effects of the attack against you and refund 1 reaction point to yourself."
+  },
+
+  "counter_touch": {
+    "name": "Counter Touch",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Quick",
+    "description": "Use carefully placed mana and a quick hand movement to prevent the activation of a touch spell",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate the activation of a magical ability that requires touch to active.",
+    "success": "Negate the effects of the attack against you and refund 1 reaction point to yourself."
+  },
+
+  "riposte": {
+    "name": "Riposte",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Strike",
+    "tempo": "Quick",
+    "trigger": "Successfully Parry an attack.",
+    "effect": "Perform a Normal Attack against the target without spending an Action Point."
+  },
+
+  "redirect": {
+    "name": "Redirect",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Balanced",
+    "trigger": "Successfully Parry or deflect an attack.",
+    "effect": "Set a new target within range for the redirected attack."
+  },
+
+  "disarm": {
+    "name": "Disarm",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Defense",
+    "tempo": "Heavy",
+    "trigger_a": "Successfully Parry an attack.",
+    "trigger_b": "Reduce a melee attack's power to 0 as a result of a Block reaction.",
+    "effect": "Your attacker drops their weapon."
+  },
+
+  "kuzushi": {
+    "name": "Kuzushi",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Grapple",
+    "tempo": "Quick",
+    "description": "Use the momentum of a target’s attack against them.",
+    "trigger": "Successfully Dodge or Parry an attack of Balanced, Heavy, or Grapple Tempo.",
+    "effects": [
+      "Reposition your opponent to an adjacent square.",
+      "If the adjacent square is a wall then knock them prone instead.",
+      "If the adjacent square results in a fall, they must pass a dynamic coordination contest to avoid falling.",
+      "If the adjacent square contains an obstacle then they must pass a dynamic coordination contest to avoid tripping and being knocked prone."
+    ]
+  },
+
+  "focused_guard": {
+    "name": "Focused Guard",
+    "group": "south_god_style",
+    "action": 2,
+    "tags": "Stance",
+    "tempo": "Balanced",
+    "description": "Adopt a defensive stance that improves your ability to block attacks.",
+    "effects": [
+      "Gain the following effects while the stance is active:",
+      "Reaction Points + 1.",
+      "Action Points -1.",
+      "Power -50 for all Actions.",
+      "Power +50 for all Reactions"
+    ]
+  },
+
+  "counter_strike_balanced": {
+    "name": "Counter Strike (Balanced)",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Strike",
+    "tempo": "Balanced",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate a balanced melee attack.",
+    "success": "Increase the Power of their Strike by 25. Perform a Normal Attack against the target without spending an Action Point."
+  },
+
+  "counter_strike_heavy": {
+    "name": "Counter Strike (Heavy)",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Strike",
+    "tempo": "Heavy",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate a heavy melee attack.",
+    "success": "Increase the Power of their Strike by 25. Perform a Heavy Attack against the target without spending an Action Point."
+  },
+
+  "counter_strike_grab": {
+    "name": "Counter Strike (Grab)",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Grapple",
+    "tempo": "Quick",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate a grappling attack.",
+    "success": "Target's attack fails. Perform a Normal Attack against the target without spending an Action Point."
+  },
+
+  "counter_strike_feint": {
+    "name": "Counter Strike (Feint)",
+    "group": "south_god_style",
+    "reaction": 1,
+    "tags": "Strike",
+    "tempo": "Quick",
+    "trigger": "You are the target of an attack and are aware of it.",
+    "prediction": "You anticipate an attack with the feint modifier.",
+    "success": "Target's attack fails. Perform a Normal Attack against the target without spending an Action Point. Increase the Power of that Normal attack by 50."
+  },
+
+  "water_stance": {
+    "name": "Water Stance",
+    "group": "south_god_style",
+    "action": 1,
+    "mana": 1,
+    "tags": "Stance",
+    "description": "Through this advanced breathing technique, you heighten your senses, gaining an unparalleled awareness of your surroundings and an instinctual understanding of your enemies' intentions.",
+    "effects": [
+      "Instantly recover all soft damage.",
+      "Eliminate all instances of Vulnerable and gain immunity to new instances.",
+      "You cannot gain Action points or perform any Actions while this stance is active.",
+      "You receive 3 additional Reactions every turn.",
+      "When any individual within range initiates an action, you discern their intent prior to choosing your reaction.",
+      "This stance costs 1 Mana each turn to maintain.",
+      "Upon conclusion of this effect, you suffer 1 Hard Damage for every 6 turns this stance was active, with a minimum of 1 Hard Damage."
+    ]
+  }
+}

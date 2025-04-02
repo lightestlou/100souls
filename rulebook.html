@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 Souls Rulebook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 p-4">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-indigo-300 mb-6">📘 100 Souls Rulebook</h1>
+
+    <!-- Search Bar -->
+    <input 
+      type="text" 
+      id="search-input" 
+      placeholder="Search rules..." 
+      class="w-full p-2 mb-6 bg-gray-800 border border-gray-700 rounded" />
+
+    <!-- Category Navigation -->
+    <div class="flex flex-wrap gap-3 mb-6" id="category-nav"></div>
+
+    <!-- Rule Sections -->
+    <div id="rules-container" class="space-y-6"></div>
+  </div>
+
+  <script src="scripts/rulebook.js"></script>
+</body>
+</html>

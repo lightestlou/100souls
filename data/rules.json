@@ -1,0 +1,21 @@
+[
+    {
+      "id": "combat",
+      "category": "Combat",
+      "title": "Basic Combat",
+      "content": "Combat in 100 Souls is turn-based and uses a unique 1d6 - 1d6 system for determining results."
+    },
+    {
+      "id": "skills",
+      "category": "Skills",
+      "title": "Skill Checks",
+      "content": "To perform a skill check, roll 1d6 - 1d6 and add your skill. Doubles allow a reroll, 6/6 is a crit success, 1/1 is a crit failure."
+    },
+    {
+      "id": "feats",
+      "category": "Feats",
+      "title": "Feat Overview",
+      "content": "Feats represent special bonuses and rule-breaking mechanics your character can acquire through play or background."
+    }
+  ]
+  
