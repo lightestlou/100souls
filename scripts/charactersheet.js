@@ -1,7 +1,7 @@
 // Version Information
 const VERSION = {
   name: "100 Souls Web Companion",
-  version: "0.6.3",
+  version: "0.6.3.1",
   author: "Michael Hayeck",
   copyright: "100 Souls is © 2025 Michael Hayeck / Late Night LAN Party. All Rights Reserved. Non-commercial fan creations are welcome and allowed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).Commercial use of any part of 100 Souls requires prior written permission."
 };
